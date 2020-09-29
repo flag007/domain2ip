@@ -15,7 +15,7 @@ func main() {
 	domain_channel1 := make(chan string)
 	var domainWG1 sync.WaitGroup
 
-	for i := 0; i < 50; i++ {
+	for i := 0; i < 20; i++ {
 		domainWG1.Add(1)
 
 		go func() {
