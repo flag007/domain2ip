@@ -3,5 +3,5 @@
 安装:
 
 ```
-▶ go get github.com/flag007/domain2ip
+▶ go get -u -v github.com/flag007/domain2ip
 ```
