@@ -26,8 +26,9 @@ func main() {
 				}
 				fmt.Fprintf(os.Stdout, "%s %s\n", domain, addr)
 			}
+			domainWG1.Done()
 		}()
-		domainWG1.Done()
+		
 	}
 
 	for sc.Scan() {
@@ -39,7 +40,7 @@ func main() {
 	if err := sc.Err(); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to read input: %s\n", err)
 	}
-
-	domainWG1.Wait()
 	close(domain_channel1)
+	domainWG1.Wait()
+	
 }
