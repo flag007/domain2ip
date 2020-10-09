@@ -3,7 +3,7 @@
 
 ```
 获取ip
-▶ cat domain.txt | domain2ip | awk '{print $2}' >> ips.txt
+▶ cat domain.txt | domain2ip | awk '{print $2}' | sort -u | tee ips.txt
 ```
 
 ```
