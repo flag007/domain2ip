@@ -11,36 +11,37 @@ import (
 
 func main() {
 	sc := bufio.NewScanner(os.Stdin)
-	var domains []string
-	domain_channel1 := make(chan string)
-	var domainWG1 sync.WaitGroup
+	domain_channel := make(chan string)
+	var domainWG sync.WaitGroup
 
 	for i := 0; i < 20; i++ {
-		domainWG1.Add(1)
+		domainWG.Add(1)
 
 		go func() {
-			for domain := range domain_channel1 {
-				addr, err := net.ResolveIPAddr("ip", domain)
+			for domain := range domain_channel {
+				ips, err := net.LookupHost(domain)
+				//addr, err := net.ResolveIPAddr("ip", domain)
 				if err != nil {
 					continue
 				}
-				fmt.Fprintf(os.Stdout, "%s %s\n", domain, addr)
+
+				for _, ip := range ips {
+					fmt.Fprintf(os.Stdout, "%s %s\n", domain, ip)
+				}
 			}
-			domainWG1.Done()
+			domainWG.Done()
 		}()
-		
 	}
 
 	for sc.Scan() {
 		domain := strings.ToLower(sc.Text())
-		domain_channel1 <- domain
-		domains = append(domains, domain)
+		domain_channel <- domain
 	}
 
 	if err := sc.Err(); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to read input: %s\n", err)
 	}
-	close(domain_channel1)
-	domainWG1.Wait()
-	
+	close(domain_channel)
+	domainWG.Wait()
+
 }
