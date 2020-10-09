@@ -8,12 +8,12 @@
 
 ```
 计算ip范围
-▶ for i in $(cat ips.txt);do ipcalc -n $i/24 | grep Network |awk '{print ($2)}' | grep -v "^10."|grep -v "192.168."| grep -v "172." >> ips_range.txt;done
+▶ for i in $(cat ips.txt);do ipcalc -n $i/24 | grep Network |awk '{print ($2)}' | grep -v "127.0.0.0" | grep -v "^10."|grep -v "192.168."| grep -v "172." >> ips_range.txt;done
 ```
 
 ```
 测试
-▶ for i in $(cat ips.txt);do ipcalc -n $i/24 | grep Network |awk '{print ($2)}' | grep -v "^10."|grep -v "192.168."| grep -v "172." ;done
+▶ for i in $(cat ips.txt);do ipcalc -n $i/24 | grep Network |awk '{print ($2)}' | grep -v "127.0.0.0" |grep -v "^10."|grep -v "192.168."| grep -v "172." ;done
 ```
 安装:
 
