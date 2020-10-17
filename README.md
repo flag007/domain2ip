@@ -3,7 +3,7 @@
 
 ```
 获取ip
-▶ cat domain.txt | domain2ip | awk '{print $2}' | sort -u | tee ips.txt
+▶ cat domain.txt | domain2ip | awk '{print $2}' | sort -u | grep -oE "^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$" | tee ips.txt
 ```
 
 ```
