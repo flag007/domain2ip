@@ -26,7 +26,7 @@ func main() {
 				}
 
 				for _, ip := range ips {
-					fmt.Fprintf(os.Stdout, "%s %s\n", domain, ip)
+					fmt.Fprintf(os.Stdout, "%s           %s\n", domain, ip)
 				}
 			}
 			domainWG.Done()
